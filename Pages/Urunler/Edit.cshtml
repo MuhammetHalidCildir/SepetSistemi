@@ -1,0 +1,75 @@
+﻿@page
+@model SepetSistemi.Pages.Urunler.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Urun</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Urun.Fiyat" class="control-label"></label>
+                <input asp-for="Urun.Fiyat" class="form-control" />
+                <span asp-validation-for="Urun.Fiyat" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Urun.Kampanya" /> @Html.DisplayNameFor(model => model.Urun.Kampanya)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Urun.KampanyaOrani" class="control-label"></label>
+                <input asp-for="Urun.KampanyaOrani" class="form-control" />
+                <span asp-validation-for="Urun.KampanyaOrani" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Urun.AltKategoriId" class="control-label"></label>
+                <select asp-for="Urun.AltKategoriId" class="form-control" asp-items="ViewBag.AltKategoriId"></select>
+                <span asp-validation-for="Urun.AltKategoriId" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Urun.Id" />
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Urun.Active" /> @Html.DisplayNameFor(model => model.Urun.Active)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Urun.Deleted" /> @Html.DisplayNameFor(model => model.Urun.Deleted)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Urun.CreateTime" class="control-label"></label>
+                <input asp-for="Urun.CreateTime" class="form-control" />
+                <span asp-validation-for="Urun.CreateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Urun.Title" class="control-label"></label>
+                <input asp-for="Urun.Title" class="form-control" />
+                <span asp-validation-for="Urun.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Urun.Description" class="control-label"></label>
+                <input asp-for="Urun.Description" class="form-control" />
+                <span asp-validation-for="Urun.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

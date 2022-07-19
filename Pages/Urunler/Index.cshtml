@@ -1,0 +1,65 @@
+﻿@page
+@model SepetSistemi.Pages.Urunler.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (Model.SepettekiUrunSayisi > 0)
+{
+    <a asp-page="/Sepet/SepettekiUrunler" class="btn btn-lg btn-outline-secondary position-relative float-right">
+        <i class="bi bi-cart-fill"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary text-light">
+            @Model.SepettekiUrunSayisi
+        </span>
+    </a>
+}
+<h1>Index</h1>
+
+
+<div class="container-fluid">
+    <div class="row g-4">
+        @foreach (var item in Model.Urun)
+        {
+            <div class="col-md-4 mb-2">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <p class="text-muted">
+                            @item.AltKategori.Kategori.Title > @item.AltKategori.Title
+                        </p>
+                        <p class="card-text">@item.Description</p>
+                        <p>
+                            @if (item.Kampanya && item.KampanyaOrani > 0)
+                            {
+                                <span class="h5 text-danger">
+                                    <del>@item.Fiyat TL</del>
+                                </span>
+                                <span class="h5 text-success">
+                                    <strong>
+                                        @Html.Raw(item.Fiyat * ((100-item.KampanyaOrani)/100m)) TL
+                                    </strong>
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="h5 text-success">
+                                    <strong>@item.Fiyat TL</strong>
+                                </span>
+                            }
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        @*../Sepet/SepeteEkle: Pages yapılarında dosyaların bulunduğu konum direk belirtilir. "../": Bir üst klasöre çıkmak için kullanılır. *@
+                        <a asp-page="../Sepet/SepeteEkle" asp-route-eklenecekUrunId="@item.Id" class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-cart-plus-fill"></i> Sepete Ekle
+                        </a>
+                        <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">
+                            <i class="bi bi-eye"></i> Ürün Detayı
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
